@@ -21,3 +21,10 @@ After that, everything else is pretty straigt forward.
 ATM i am using an Arduino Leonardo and a generic 16x2 LCD
 
 All this is still WIP.
+
+
+TODO:
+
+- add USB detection code
+- make 3d-printalbe encosure
+- 
