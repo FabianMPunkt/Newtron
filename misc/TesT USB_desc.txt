@@ -1,0 +1,81 @@
+01
+--
+
+Device descriptor: 
+Descriptor Length:	12
+Descriptor type:	01
+USB version:		0110
+Device class:		02
+Device Subclass:	00
+Device Protocol:	00
+Max.packet size:	40
+Vendor  ID:		FFFF
+Product ID:		0006
+Revision ID:		0000
+Mfg.string index:	01
+Prod.string index:	02
+Serial number index:	03
+Number of conf.:	01
+
+Configuration descriptor:
+Total length:		0043
+Num.intf:		02
+Conf.value:		01
+Conf.string:		00
+Attr.:			80
+Max.pwr:		32
+
+Interface descriptor:
+Intf.number:		00
+Alt.:			00
+Endpoints:		01
+Intf. Class:		02
+Intf. Subclass:		02
+Intf. Protocol:		00
+Intf.string:		00
+Unknown descriptor:
+Length:		05
+Type:		24
+Contents:	0010010524
+Unknown descriptor:
+Length:		05
+Type:		24
+Contents:	0600010524
+Unknown descriptor:
+Length:		05
+Type:		24
+Contents:	0100010424
+Unknown descriptor:
+Length:		04
+Type:		24
+Contents:	02060705
+
+Endpoint descriptor:
+Endpoint address:	81
+Attr.:			03
+Max.pkt size:		0010
+Polling interval:	01
+
+Interface descriptor:
+Intf.number:		01
+Alt.:			00
+Endpoints:		02
+Intf. Class:		0A
+Intf. Subclass:		00
+Intf. Protocol:		00
+Intf.string:		00
+
+Endpoint descriptor:
+Endpoint address:	02
+Attr.:			02
+Max.pkt size:		0040
+Polling interval:	00
+
+Endpoint descriptor:
+Endpoint address:	82
+Attr.:			02
+Max.pkt size:		0040
+Polling interval:	00
+
+
+Addr:1(0.0.1)
