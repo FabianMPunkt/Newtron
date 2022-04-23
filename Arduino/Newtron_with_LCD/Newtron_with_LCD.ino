@@ -157,7 +157,7 @@ void displayOFF() {
   lcdStatus = false;
 }
 
-void bootAnim() {
+void bootAnim() {                 //fancy boot animation cus why not
   int animDelay = 30;
 
     
@@ -202,36 +202,17 @@ void bootAnim() {
   delay(1000);
 
   lcd.setCursor(0, 0);
-  lcd.print(" ");
+  lcd.print("  ");
   delay(animDelay);
   lcd.print("  ");
   delay(animDelay);
-  lcd.print("   ");
+  lcd.print("  ");
   delay(animDelay);
-  lcd.print("    ");
+  lcd.print("  ");
   delay(animDelay);
-  lcd.print("     ");
+  lcd.print("  ");
   delay(animDelay);
-  lcd.print("      ");
-  delay(animDelay);
-  lcd.print("       ");
-  delay(animDelay);
-  lcd.print("        ");
-  delay(animDelay);
-  lcd.print("         ");
-  delay(animDelay);
-  lcd.print("          ");
-  delay(animDelay);
-  lcd.print("           ");
-  delay(animDelay);
-  lcd.print("            ");
-  delay(animDelay);
-  lcd.print("             ");
-  delay(animDelay);
-  lcd.print("              ");
-  delay(animDelay);
-  lcd.print("               ");
-  delay(animDelay);
-  lcd.print("                ");
-  delay(animDelay);
+  lcd.print("  ");
+  
+  delay(300);
 }
