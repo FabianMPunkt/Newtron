@@ -27,4 +27,4 @@ TODO:
 
 - add USB detection code
 - make 3d-printalbe encosure
-- 
+- explore teensyduino and its USB-host capabilities
