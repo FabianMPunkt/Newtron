@@ -28,9 +28,12 @@ unsigned long timeoutValue = 30000;         //timeout Value for the LCD, when in
 const int lcdPowerPin = 6;
 const int rstPin = 2;
 const int pedalPin = 3;
+const int USBStatusPin = 4;                 //Connected to pin "SS" on USB Host
 bool currentPedalState;
 bool lastPedalState;
 bool lcdStatus;
+bool lastUSBStatus;
+bool USBStatus;
 
 
 void setup() {
@@ -38,6 +41,7 @@ void setup() {
   pinMode (pedalPin, INPUT_PULLUP);
   pinMode (rstPin, INPUT_PULLUP);
   pinMode (lcdPowerPin, OUTPUT);
+  pinMode (USBStatusPin, INPUT);
 
   Keyboard.begin();
   
@@ -70,8 +74,25 @@ void loop() {
     displayOFF();
   }
 
+  
 
-  if (Serial1.available()) {
+  lastUSBStatus = USBStatus;
+
+  USBStatus = digitalRead(USBStatusPin);
+ 
+
+  if (lastUSBStatus == LOW && USBStatus == HIGH){     //detects rising edge of USBStatusPin, and clears the screen.
+    
+    lcd.setCursor(0, 1);
+    lcd.print("                ");
+    
+    lcd.setCursor(0, 1);
+    lcd.print(maxValue);
+  }
+
+
+
+  if (USBStatus) {
 
     rawlast = raw;                            //has something to do with the buffering.
 
@@ -105,10 +126,10 @@ void loop() {
 
   }
 
-  //  else{
-  //    lcd.setCursor(0,1);
-  //    lcd.print("No Device found!");
-  //  }
+    else{
+      lcd.setCursor(0,1);
+      lcd.print("No Device found!");
+    }
 
 
   Pedal();
@@ -121,7 +142,7 @@ void loop() {
 
 void Pedal() {
 
-  lastPedalState = currentPedalState;         //this is used to determine the negative edge when the pedal is pressed.
+  lastPedalState = currentPedalState;         //this is used to determine the falling edge when the pedal is pressed.
   currentPedalState = digitalRead(pedalPin);
 
   if (lastPedalState == HIGH && currentPedalState == LOW) {
