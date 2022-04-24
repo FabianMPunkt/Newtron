@@ -1,6 +1,7 @@
 //holy shit this is working!!!!
 //
 //  Newtron Prototype V0.5
+//  https://github.com/TheWaschtlPlays/Newtron
 //  with LCD!
 //
 //  This reads incoming data from Serial1, that is seperated by a "".
@@ -22,7 +23,7 @@ int maxValue = 0;
 
 unsigned long currentMillis;
 unsigned long millisUntilTimeout;
-unsigned long timeoutValue = 30000;         //this will determine when the LCD will shutdown when inactive (in ms)
+unsigned long timeoutValue = 30000;         //timeout Value for the LCD, when inactive to prevent LCD burn-in. (using millis)
 
 const int lcdPowerPin = 6;
 const int rstPin = 2;
@@ -45,8 +46,8 @@ void setup() {
 
   bootAnim();                               //run this before the Serial begin stuff or things will get fucked.
 
-  Serial.begin(9600);
-  Serial1.begin(9600);
+  Serial.begin(9600);                       //Serial goes to the Computer
+  Serial1.begin(9600);                      //Serial1 goes to the Host Controller.
   
   lcd.setCursor(0, 0);
   lcd.print("Spitzenwert:");
