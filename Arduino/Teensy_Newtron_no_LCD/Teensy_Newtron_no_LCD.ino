@@ -6,6 +6,8 @@
 //
 //
 
+#include "Keyboard.h"
+
 #include "USBHost_t36.h"
 #define USBBAUD 9600
 uint32_t baud = USBBAUD;
@@ -23,9 +25,18 @@ int rawValueInt;
 int posValue;
 int maxValue = 0;
 
+int pedalPin = 9;
+bool currentPedalState;
+bool lastPedalState;
 
 
 void setup() {
+
+  pinMode (pedalPin, INPUT_PULLUP);
+  pinMode (11, OUTPUT);
+  digitalWrite(11, LOW);
+
+  Keyboard.begin();
 
   myusb.begin();
   Serial1.begin(9600);
@@ -76,5 +87,24 @@ void loop() {
         Serial.print(maxValue);
         Serial.println();
   }
+
+  Pedal();
   
+}
+
+void Pedal() {
+
+  lastPedalState = currentPedalState;         //this is used to determine the falling edge when the pedal is pressed.
+  currentPedalState = digitalRead(pedalPin);
+
+  if (lastPedalState == HIGH && currentPedalState == LOW) {
+
+    Keyboard.println(maxValue);
+    rstMaxValue();
+    delay(300);                             //300ms delay so you cant accidentally press the pedal twice.
+  }
+}
+
+void rstMaxValue() {
+  maxValue = 0;
 }
