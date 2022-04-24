@@ -1,6 +1,6 @@
 //holy shit this is working!!!!
 //
-//  Newtron Prototype V0.5
+//  Newtron Prototype V0.6
 //  https://github.com/TheWaschtlPlays/Newtron
 //  with LCD!
 //
@@ -220,7 +220,7 @@ void bootAnim() {                 //fancy boot animation cus why not
   lcd.print(".");
   delay(animDelay);
   lcd.setCursor(11, 0);
-  lcd.print("5");
+  lcd.print("6");
   delay(1000);
 
   lcd.setCursor(0, 0);
