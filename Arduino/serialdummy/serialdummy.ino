@@ -21,7 +21,7 @@ void loop() {
 
   Serial.print(analogRead(A0) * 10);
     
-  Serial.print(" ");  //"" is the real deal
+  Serial.print("  ");  //"" is the real deal
 
   delay(30);
 }
