@@ -10,12 +10,19 @@
 #define USBBAUD 9600
 uint32_t baud = USBBAUD;
 USBHost myusb;
-
 USBSerial_BigBuffer userial(myusb, 1); // Handles anything up to 512 bytes
 
 USBDriver *drivers[] = {&userial};
 #define CNT_DEVICES (sizeof(drivers)/sizeof(drivers[0]))
 bool driver_active[CNT_DEVICES] = {false};
+
+
+String raw;
+String rawlast;
+int rawValueInt;
+int posValue;
+int maxValue = 0;
+
 
 
 void setup() {
@@ -24,6 +31,8 @@ void setup() {
   Serial1.begin(9600);
 
 }
+
+
 
 
 void loop() {
@@ -48,7 +57,24 @@ void loop() {
   
 
   while (userial.available()) {
-    Serial.write(userial.read());
+
+    rawlast = raw;                            //has something to do with the buffering.
+    
+    raw = userial.readStringUntil('');       //reads the incoming data. "" ist the actual seperator.
+    rawValueInt = raw.toInt();                //converts String type to Integer type.
+    posValue = fabsf(rawValueInt);            //turns negative values into positive values.
+
+    if (posValue >= maxValue) {               //largest value gets saves as "maxValue".
+      maxValue = posValue;
+    }
+
+        Serial.print("raw: ");
+        Serial.print(raw);
+        Serial.print(" | pos: ");
+        Serial.print(posValue);
+        Serial.print(" | max: ");
+        Serial.print(maxValue);
+        Serial.println();
   }
   
 }
