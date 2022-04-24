@@ -83,6 +83,7 @@ void loop() {
 
   if (lastUSBStatus == LOW && USBStatus == HIGH){     //detects rising edge of USBStatusPin, and clears the screen.
     
+    displayON();
     lcd.setCursor(0, 1);
     lcd.print("                ");
     
