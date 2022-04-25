@@ -106,6 +106,8 @@ void Pedal() {
 
   if (lastPedalState == HIGH && currentPedalState == LOW) {
     
+    Serial.println("Pedal has been pressed");
+     
     Keyboard.println(maxValue);
     rstMaxValue();
     delay(300);                             //300ms delay so you cant accidentally press the pedal twice.
@@ -114,4 +116,5 @@ void Pedal() {
 
 void rstMaxValue() {
   maxValue = 0;
+  Serial.println("maxVaule has been reset");
 }
