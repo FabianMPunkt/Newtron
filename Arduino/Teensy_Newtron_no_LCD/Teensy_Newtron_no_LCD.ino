@@ -61,7 +61,9 @@ void loop() {
         digitalWrite(13, LOW);
         rstMaxValue();
         
-      } else {  
+      }
+      
+      else {
         driver_active[i] = true;
         userial.begin(baud);
         Serial.println("USB connected");
