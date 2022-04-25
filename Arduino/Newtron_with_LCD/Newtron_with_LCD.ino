@@ -82,8 +82,10 @@ void loop() {
  
 
   if (lastUSBStatus == LOW && USBStatus == HIGH){     //detects rising edge of USBStatusPin, and clears the screen.
-    
+
+    Serial.println("USB connected");
     displayON();
+
     lcd.setCursor(0, 1);
     lcd.print("                ");
     
@@ -129,7 +131,7 @@ void loop() {
 
     else{
       lcd.setCursor(0,1);
-      lcd.print("No Device found!");
+      lcd.print("USB disconnected");
     }
 
 
