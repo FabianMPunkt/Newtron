@@ -34,12 +34,16 @@ void setup() {
 
   pinMode (pedalPin, INPUT_PULLUP);
   pinMode (11, OUTPUT);
+  pinMode (13, OUTPUT);
   digitalWrite(11, LOW);
 
   Keyboard.begin();
 
   myusb.begin();
   Serial1.begin(9600);
+
+  raw.reserve(200);
+  rawlast.reserve(200);
 
 }
 
@@ -53,13 +57,15 @@ void loop() {
       
       if (driver_active[i]) {
        driver_active[i] = false;
-        Serial.println();
-        Serial.println("disconnected");
+        Serial.println("USB disconnected");
+        digitalWrite(13, LOW);
+        rstMaxValue();
         
       } else {  
         driver_active[i] = true;
         userial.begin(baud);
-        Serial.println("connected");
+        Serial.println("USB connected");
+        digitalWrite(13, HIGH);
         
       }
     }
@@ -86,9 +92,10 @@ void loop() {
         Serial.print(" | max: ");
         Serial.print(maxValue);
         Serial.println();
-  }
 
-  Pedal();
+    Pedal();
+
+  }
   
 }
 
@@ -98,7 +105,7 @@ void Pedal() {
   currentPedalState = digitalRead(pedalPin);
 
   if (lastPedalState == HIGH && currentPedalState == LOW) {
-
+    
     Keyboard.println(maxValue);
     rstMaxValue();
     delay(300);                             //300ms delay so you cant accidentally press the pedal twice.
