@@ -1,10 +1,12 @@
-//  This is an extremely simplified version of the Teensy 3.6 USB Host Serial example:
-//  https://github.com/PaulStoffregen/USBHost_t36/blob/master/examples/Serial/Serial.ino
 //
-//  This sketch will read USBSerial data from a USB device connected to the teensy's USB Host pins.
-//  It will also detect whether USB is connected or not.
+//  Newtron V0.8
+//  Teensy 4.1 (without LCD)
+//  https://github.com/TheWaschtlPlays/Newtron
 //
 //
+//  This reads incoming data from Serial1, that is seperated by a "".
+//  it then determines the maximum value
+//  when pin3 is pulled low, it sends said value to the connected computer as if it were keyboard presses.
 
 #include "Keyboard.h"
 
