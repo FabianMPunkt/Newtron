@@ -1,8 +1,9 @@
 //holy shit this is working!!!!
 //
-//  Newtron Prototype V0.6
+//  Newtron V0.8
+//  Arduino Leonardo + LCD
 //  https://github.com/TheWaschtlPlays/Newtron
-//  with LCD!
+//
 //
 //  This reads incoming data from Serial1, that is seperated by a "".
 //  it then determines the maximum value
@@ -94,6 +95,16 @@ void loop() {
   }
 
 
+  if (lastUSBStatus == HIGH && USBStatus == LOW){     //detects falling edge of USBStatusPin, and clears the screen.
+
+    Serial.println("USB disconnected");
+    rstMaxValue();
+
+    lcd.setCursor(0,1);
+    lcd.print("USB disconnected");
+    
+  }
+
 
   if (USBStatus) {
 
@@ -129,11 +140,6 @@ void loop() {
 
   }
 
-    else{
-      lcd.setCursor(0,1);
-      lcd.print("USB disconnected");
-    }
-
 
   Pedal();
 
@@ -150,6 +156,8 @@ void Pedal() {
 
   if (lastPedalState == HIGH && currentPedalState == LOW) {
 
+    Serial.println("Pedal has been pressed");
+
     Keyboard.println(maxValue);
     rstMaxValue();
     delay(300);                             //300ms delay so you cant accidentally press the pedal twice.
@@ -161,7 +169,8 @@ void rstMaxValue() {
   displayON();
   maxValue = 0;
   lcd.setCursor(0, 1);
-  lcd.print("      ");
+  lcd.print("      "); 
+  Serial.println("maxVaule has been reset");
 }
 
 
@@ -223,7 +232,7 @@ void bootAnim() {                 //fancy boot animation cus why not
   lcd.print(".");
   delay(animDelay);
   lcd.setCursor(11, 0);
-  lcd.print("6");
+  lcd.print("8");
   delay(1000);
 
   lcd.setCursor(0, 0);
