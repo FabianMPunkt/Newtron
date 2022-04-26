@@ -1,4 +1,4 @@
-//holy shit this is working!!!!
+ //holy shit this is working!!!!
 //
 //  Newtron V0.8
 //  Arduino Leonardo + LCD
@@ -33,9 +33,11 @@ const int USBStatusPin = 4;                 //Connected to pin "SS" on USB Host
 bool currentPedalState;
 bool lastPedalState;
 bool lcdStatus;
-bool lastUSBStatus;
+bool lastUSBStatus = 0;
 bool USBStatus;
 
+bool USBFlag1;
+bool USBFlag2;
 
 void setup() {
 
@@ -75,34 +77,47 @@ void loop() {
     displayOFF();
   }
 
-  
-
-  lastUSBStatus = USBStatus;
 
   USBStatus = digitalRead(USBStatusPin);
  
 
-  if (lastUSBStatus == LOW && USBStatus == HIGH){     //detects rising edge of USBStatusPin, and clears the screen.
+  if (USBStatus == HIGH) {                //detects rising edge of USBStatusPin, and clears the screen.
+    if (USBFlag1 == LOW) {
 
-    Serial.println("USB connected");
-    displayON();
-
-    lcd.setCursor(0, 1);
-    lcd.print("                ");
+      USBFlag1 = 1;
     
-    lcd.setCursor(0, 1);
-    lcd.print(maxValue);
+      Serial.println("USB connected");
+      displayON();
+  
+      lcd.setCursor(0, 1);
+      lcd.print("                ");
+      
+      lcd.setCursor(0, 1);
+      lcd.print(maxValue);
+    }
+  }
+  
+  else {
+   USBFlag1 = 0;
   }
 
 
-  if (lastUSBStatus == HIGH && USBStatus == LOW){     //detects falling edge of USBStatusPin, and clears the screen.
+  if (USBStatus == LOW){                   //detects falling edge of USBStatusPin, and clears the screen.
+    if(USBFlag2 == LOW){
 
-    Serial.println("USB disconnected");
-    rstMaxValue();
+      USBFlag2 = 1;
+  
+      Serial.println("USB disconnected");
+      rstMaxValue();
+  
+      lcd.setCursor(0,1);
+      lcd.print("USB disconnected");
 
-    lcd.setCursor(0,1);
-    lcd.print("USB disconnected");
-    
+    }
+  }
+  
+  else {
+   USBFlag2 = 0;
   }
 
 
