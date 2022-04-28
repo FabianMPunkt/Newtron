@@ -23,9 +23,9 @@ bool driver_active[CNT_DEVICES] = {false};
 
 String raw;
 String rawlast;
-int rawValueInt;
-int posValue;
-int maxValue = 0;
+float rawValueFloat;
+float posValue;
+float maxValue = 0;
 
 int pedalPin = 9;
 bool currentPedalState;
@@ -82,8 +82,8 @@ void loop() {
     rawlast = raw;                            //has something to do with the buffering.
     
     raw = userial.readStringUntil('');       //reads the incoming data. "" ist the actual seperator.
-    rawValueInt = raw.toInt();                //converts String type to Integer type.
-    posValue = fabsf(rawValueInt);            //turns negative values into positive values.
+    rawValueFloat = raw.toFloat();                //converts String type to Integer type.
+    posValue = fabsf(rawValueFloat);            //turns negative values into positive values.
 
     if (posValue >= maxValue) {               //largest value gets saves as "maxValue".
       maxValue = posValue;
