@@ -18,9 +18,9 @@ LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 
 String raw;
 String rawlast;
-int rawValueInt;
-int posValue;
-int maxValue = 0;
+float rawValueFloat;
+float posValue;
+float maxValue = 0;
 
 unsigned long currentMillis;
 unsigned long millisUntilTimeout;
@@ -126,8 +126,8 @@ void loop() {
     rawlast = raw;                            //has something to do with the buffering.
 
     raw = Serial1.readStringUntil('');       //reads the incoming data. "" ist the actual seperator.
-    rawValueInt = raw.toInt();                //converts String type to Integer type.
-    posValue = fabsf(rawValueInt);            //turns negative values into positive values.
+    rawValueFloat = raw.toFloat();                //converts String type to Integer type.
+    posValue = fabsf(rawValueFloat);            //turns negative values into positive values.
 
     if (posValue > maxValue) {                //largest value gets saves as "maxValue".
       maxValue = posValue;
