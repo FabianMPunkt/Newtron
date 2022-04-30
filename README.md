@@ -26,4 +26,4 @@ All this is still WIP.
 TODO:
 
 - make 3d-printalbe encosure
-- explore teensyduino and its USB-host capabilities
+- get the decimal point working
