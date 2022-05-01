@@ -1,4 +1,4 @@
- //holy shit this is working!!!!
+//holy shit this is working!!!!
 //
 //  Newtron V0.8
 //  Arduino Leonardo + LCD
@@ -16,10 +16,13 @@
 
 LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 
-String raw;
-String rawlast;
-float rawValueFloat;
-float posValue;
+String integString;           //innteger part of the value
+String decimString;           //decimal point of the value
+
+float integFloat;
+float decimFloat;
+
+float finValue;
 float maxValue = 0;
 
 unsigned long currentMillis;
@@ -47,9 +50,6 @@ void setup() {
   pinMode (USBStatusPin, INPUT);
 
   Keyboard.begin();
-  
-  raw.reserve(400);                         //I think this is for buffering all the incoming data. i dont really know how this works lol.
-  rawlast.reserve(400);
 
   bootAnim();                               //run this before the Serial begin stuff or things will get fucked.
 
@@ -123,14 +123,20 @@ void loop() {
 
   if (USBStatus) {
 
-    rawlast = raw;                            //has something to do with the buffering.
+    integString = Serial1.readStringUntil(',');       //reads the value before the comma.
+    integFloat = integString.toFloat();               //converts String type to Float type
+    integFloat = fabsf(integFloat);                   //turns all negative numbers positive
+    
+    
+    decimString = Serial1.readStringUntil('');       //reads the value after the comma, until the separator ""
+    decimFloat = decimString.toFloat();               //converts String type to Float type. the decimal number is now a standalone float variable.
+    decimFloat = decimFloat / 10;                     //devides the decimal number by 10.
 
-    raw = Serial1.readStringUntil('');       //reads the incoming data. "" ist the actual seperator.
-    rawValueFloat = raw.toFloat();                //converts String type to Integer type.
-    posValue = fabsf(rawValueFloat);            //turns negative values into positive values.
 
-    if (posValue > maxValue) {                //largest value gets saves as "maxValue".
-      maxValue = posValue;
+    finValue = integFloat + decimFloat;               //adds integer number and decimal number.
+
+    if (finValue >= maxValue) {                       //largest value gets saves as "maxValue".
+      maxValue = finValue;
       displayON();                            //whenever there is a new "maxValue" the LCD will turn on again.
       lcd.setCursor(0, 1);
       lcd.print("      ");
@@ -142,17 +148,18 @@ void loop() {
     lcd.setCursor(8, 1);
     lcd.print("      ");
     lcd.setCursor(8, 1);
-    lcd.print(posValue);
+    lcd.print(finValue);
 
 
         Serial.print("raw: ");
-        Serial.print(raw);
-        Serial.print(" | pos: ");
-        Serial.print(posValue);
+        Serial.print(integString);
+        Serial.print(",");
+        Serial.print(decimString);
+        Serial.print(" | fin: ");
+        Serial.print(finValue);
         Serial.print(" | max: ");
         Serial.print(maxValue);
         Serial.println();
-
   }
 
 
