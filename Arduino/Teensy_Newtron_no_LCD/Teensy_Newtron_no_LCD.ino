@@ -45,7 +45,7 @@ void setup() {
   Keyboard.begin();
 
   myusb.begin();
-  Serial1.begin(9600);
+  Serial.begin(9600);
 
 
 }
