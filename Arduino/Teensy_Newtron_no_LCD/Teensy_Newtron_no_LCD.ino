@@ -21,10 +21,13 @@ USBDriver *drivers[] = {&userial};
 bool driver_active[CNT_DEVICES] = {false};
 
 
-String raw;
-String rawlast;
-float rawValueFloat;
-float posValue;
+String integString;           //innteger part of the value
+String decimString;           //decimal point of the value
+
+float integFloat;
+float decimFloat;
+
+float finValue;
 float maxValue = 0;
 
 int pedalPin = 9;
@@ -44,8 +47,6 @@ void setup() {
   myusb.begin();
   Serial1.begin(9600);
 
-  raw.reserve(200);
-  rawlast.reserve(200);
 
 }
 
@@ -79,20 +80,29 @@ void loop() {
 
   while (userial.available()) {
 
-    rawlast = raw;                            //has something to do with the buffering.
-    
-    raw = userial.readStringUntil('');       //reads the incoming data. "" ist the actual seperator.
-    rawValueFloat = raw.toFloat();                //converts String type to Integer type.
-    posValue = fabsf(rawValueFloat);            //turns negative values into positive values.
 
-    if (posValue >= maxValue) {               //largest value gets saves as "maxValue".
-      maxValue = posValue;
+    integString = userial.readStringUntil(',');       //reads the value before the comma.
+    integFloat = integString.toFloat();               //converts String type to Float type
+    integFloat = fabsf(integFloat);                   //turns all negative numbers positive
+    
+    
+    decimString = userial.readStringUntil('');       //reads the value after the comma, until the separator ""
+    decimFloat = decimString.toFloat();               //converts String type to Float type. the decimal number is now a standalone float variable.
+    decimFloat = decimFloat / 10;                     //devides the decimal number by 10.
+
+
+    finValue = integFloat + decimFloat;               //adds integer number and decimal number.
+
+    if (finValue >= maxValue) {                       //largest value gets saves as "maxValue".
+      maxValue = finValue;
     }
 
         Serial.print("raw: ");
-        Serial.print(raw);
-        Serial.print(" | pos: ");
-        Serial.print(posValue);
+        Serial.print(integString);
+        Serial.print(",");
+        Serial.print(decimString);
+        Serial.print(" | fin: ");
+        Serial.print(finValue);
         Serial.print(" | max: ");
         Serial.print(maxValue);
         Serial.println();
