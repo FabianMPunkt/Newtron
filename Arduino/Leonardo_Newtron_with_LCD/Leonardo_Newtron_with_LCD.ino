@@ -1,6 +1,6 @@
 //holy shit this is working!!!!
 //
-//  Newtron V0.8
+//  Newtron V0.9
 //  Arduino Leonardo + LCD
 //  https://github.com/TheWaschtlPlays/Newtron
 //
@@ -55,11 +55,11 @@ void setup() {
 
   Serial.begin(9600);                       //Serial goes to the Computer
   Serial1.begin(9600);                      //Serial1 goes to the Host Controller.
-  
+
   lcd.setCursor(0, 0);
   lcd.print("Spitzenwert:");
   displayON();                              //the "displayON" function will turn on the LCD and reset the timeout.
-  
+
   maxValue = 0;
 }
 
@@ -79,45 +79,45 @@ void loop() {
 
 
   USBStatus = digitalRead(USBStatusPin);
- 
+
 
   if (USBStatus == HIGH) {                //detects rising edge of USBStatusPin, and clears the screen.
     if (USBFlag1 == LOW) {
 
       USBFlag1 = 1;
-    
+
       Serial.println("USB connected");
       displayON();
-  
+
       lcd.setCursor(0, 1);
       lcd.print("                ");
-      
+
       lcd.setCursor(0, 1);
       lcd.print(maxValue);
     }
   }
-  
+
   else {
-   USBFlag1 = 0;
+    USBFlag1 = 0;
   }
 
 
-  if (USBStatus == LOW){                   //detects falling edge of USBStatusPin, and clears the screen.
-    if(USBFlag2 == LOW){
+  if (USBStatus == LOW) {                  //detects falling edge of USBStatusPin, and clears the screen.
+    if (USBFlag2 == LOW) {
 
       USBFlag2 = 1;
-  
+
       Serial.println("USB disconnected");
       rstMaxValue();
-  
-      lcd.setCursor(0,1);
+
+      lcd.setCursor(0, 1);
       lcd.print("USB disconnected");
 
     }
   }
-  
+
   else {
-   USBFlag2 = 0;
+    USBFlag2 = 0;
   }
 
 
@@ -126,8 +126,8 @@ void loop() {
     integString = Serial1.readStringUntil(',');       //reads the value before the comma.
     integFloat = integString.toFloat();               //converts String type to Float type
     integFloat = fabsf(integFloat);                   //turns all negative numbers positive
-    
-    
+
+
     decimString = Serial1.readStringUntil('');       //reads the value after the comma, until the separator ""
     decimFloat = decimString.toFloat();               //converts String type to Float type. the decimal number is now a standalone float variable.
     decimFloat = decimFloat / 10;                     //devides the decimal number by 10.
@@ -151,15 +151,15 @@ void loop() {
     lcd.print(finValue);
 
 
-        Serial.print("raw: ");
-        Serial.print(integString);
-        Serial.print(",");
-        Serial.print(decimString);
-        Serial.print(" | fin: ");
-        Serial.print(finValue);
-        Serial.print(" | max: ");
-        Serial.print(maxValue);
-        Serial.println();
+    Serial.print("raw: ");
+    Serial.print(integString);
+    Serial.print(",");
+    Serial.print(decimString);
+    Serial.print(" | fin: ");
+    Serial.print(finValue);
+    Serial.print(" | max: ");
+    Serial.print(maxValue);
+    Serial.println();
   }
 
 
@@ -191,7 +191,7 @@ void rstMaxValue() {
   displayON();
   maxValue = 0;
   lcd.setCursor(0, 1);
-  lcd.print("      "); 
+  lcd.print("      ");
   Serial.println("maxVaule has been reset");
 }
 
@@ -216,10 +216,10 @@ void displayOFF() {
 void bootAnim() {                 //fancy boot animation cus why not
   int animDelay = 30;
 
-    
+
   digitalWrite(lcdPowerPin, HIGH);
   lcd.begin(16, 2);
-  
+
   lcd.setCursor(0, 0);
   lcd.print("N");
   delay(animDelay);
@@ -254,7 +254,7 @@ void bootAnim() {                 //fancy boot animation cus why not
   lcd.print(".");
   delay(animDelay);
   lcd.setCursor(11, 0);
-  lcd.print("8");
+  lcd.print("9");
   delay(1000);
 
   lcd.setCursor(0, 0);
@@ -269,6 +269,6 @@ void bootAnim() {                 //fancy boot animation cus why not
   lcd.print("  ");
   delay(animDelay);
   lcd.print("  ");
-  
+
   delay(300);
 }

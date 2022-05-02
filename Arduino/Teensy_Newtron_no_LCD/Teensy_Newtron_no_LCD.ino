@@ -1,5 +1,5 @@
 //
-//  Newtron V0.8
+//  Newtron V0.9
 //  Teensy 4.1 (without LCD)
 //  https://github.com/TheWaschtlPlays/Newtron
 //
