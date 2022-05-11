@@ -33,7 +33,7 @@ It's essentially the same, only with some extra USB code that i ripped from [her
 
 
 In the final project i will also be using a 16x2LCD with an i2c add-on.
-
+I will also be making some building Instructions.
 
 All this is still WIP.
 
