@@ -15,10 +15,22 @@ The TesT-device trannsmits alle the values over its USBSerial Port in a single l
 Now you may be wondering how we can read this data using an Arduino, if the is a USB-Device.
 After searching through virtually every existing Arduino forum there is, i finally found a solution:
 
-These little [USB Host Boards](https://www.hobbytronics.co.uk/usb-host/usb-host-board-v24) sold by HobbyTronics can, among many other cool things, take data from a USBSerial connection, and "convert" it to standart RX / TX signals.
-After that, everything else is pretty straigt forward.
 
-ATM i am using an Arduino Leonardo and a generic 16x2 LCD
+At first i was using one of these little [USB Host Boards](https://www.hobbytronics.co.uk/usb-host/usb-host-board-v24), sold by HobbyTronics and an Arduino Leonardo.
+These Host boards can, among many other cool things, take data from a USBSerial connection, and "convert" it to standart RX / TX signals.
+After that, reading the Serial Port using the Arduino would be very simple.
+All that code is still present.
+(files labeled with "Leonardo")
+
+
+
+Then i figured out that all this would be much simpler using a Teensy 4.1, as it has a USB Host built in.
+It's essentially the same, only with some extra USB code that i ripped from [here](https://github.com/PaulStoffregen/USBHost_t36/blob/master/examples/Serial/Serial.ino).
+(files labeled with "Teensy")
+
+
+In the final project i will also be using a 16x2LCD with an i2c add-on.
+
 
 All this is still WIP.
 
@@ -26,4 +38,6 @@ All this is still WIP.
 TODO:
 
 - make 3d-printalbe encosure
-- make commands via serial
+- add i2c-LCD to Teensy code
+- make debug commands via serial
+- build the damn thing
