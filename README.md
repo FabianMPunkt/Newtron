@@ -26,4 +26,4 @@ All this is still WIP.
 TODO:
 
 - make 3d-printalbe encosure
-- get the decimal point working
+- make commands via serial
