@@ -5,7 +5,7 @@
 ## Introduction:
 
 This little project is made to read the USBSerial output of one these ["TesT"-devices](https://www.test-gmbh.com/de/produkte/pruefmaschinen/einfache-pruefrahmen/modell-105/).
-It will process the readings, turn them all into positive values and save the highes value.
+It will process the readings, turn them all into positive values and save the highest value.
 
 With the press of a button the highest value will the be sent to the computer using the "Keyboard.h" library.
 
