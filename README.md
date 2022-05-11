@@ -2,9 +2,9 @@
 ## A little Arduino-based USB device that reads Serial data from a "TesT" - Newton-meter and transmits it directly to the Computer
 
 
-Alright then,
+## Introduction:
 
-this little project is made to read the USBSerial output of one these ["TesT"-devices](https://www.test-gmbh.com/de/produkte/pruefmaschinen/einfache-pruefrahmen/modell-105/).
+This little project is made to read the USBSerial output of one these ["TesT"-devices](https://www.test-gmbh.com/de/produkte/pruefmaschinen/einfache-pruefrahmen/modell-105/).
 It will process the readings, turn them all into positive values and save the highes value.
 
 With the press of a button the highest value will the be sent to the computer using the "Keyboard.h" library.
