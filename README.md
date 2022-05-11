@@ -15,7 +15,8 @@ The TesT-device trannsmits alle the values over its USBSerial Port in a single l
 Now you may be wondering how we can read this data using an Arduino, if the is a USB-Device.
 After searching through virtually every existing Arduino forum there is, i finally found a solution:
 
-###Arduino:
+
+### Arduino:
 
 At first i was using one of these little [USB Host Boards](https://www.hobbytronics.co.uk/usb-host/usb-host-board-v24), sold by HobbyTronics and an Arduino Leonardo.
 These Host boards can, among many other cool things, take data from a USBSerial connection, and "convert" it to standard RX / TX signals.
@@ -24,7 +25,7 @@ All that code is still present.
 (files labeled with "Leonardo")
 
 
-###Teensy:
+### Teensy:
 
 Then i figured out that all this would be much simpler using a Teensy 4.1, as it has a USB Host built in.
 It's essentially the same, only with some extra USB code that i ripped from [here](https://github.com/PaulStoffregen/USBHost_t36/blob/master/examples/Serial/Serial.ino).
