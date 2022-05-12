@@ -10,7 +10,7 @@ It will process the readings, turn them all into positive values and save the hi
 With the press of a button the highest value will the be sent to the computer using the "Keyboard.h" library.
 
 
-The TesT-device trannsmits alle the values over its USBSerial Port in a single line as seen in [these readings](misc/OG_readings.txt)
+The TesT-device trannsmits all the values over its USBSerial Port in a single line as seen in [these readings](misc/OG_readings.txt)
 
 Now you may be wondering how we can read this data using an Arduino, if the is a USB-Device.
 After searching through virtually every existing Arduino forum there is, i finally found a solution:
