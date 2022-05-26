@@ -47,7 +47,7 @@ Parts list:
 Hardware is still very much WIP.
 The Hardware and assembly is made to be as simple as possible, and with as few printed parts as possible.
 
-my plan is it ho make the screen and the button all one "front panel" unit, and in the back having the teensy soldered to a piece of perfboard, srewed to the frame.
+my plan is it to make the screen and the button all one "front panel" unit, and in the back having the teensy soldered to a piece of perfboard, srewed to the frame.
 The screen & the USB connector will be connected to the teensy via a JST XH connector. everything clearly labeled on the inside.
 
 maybe i can fit it all on a single piece of perfboard, not reqiering a single wire.
