@@ -33,10 +33,22 @@ It's essentially the same, only with some extra USB code that i ripped from [her
 
 ## Hardware:
 
-Hardware is still very much WIP
-In the final project i will also be using a 16x2LCD with an i2c add-on.
-I will also be making some building Instructions.
+Parts list:
+- Teensy 4.1
+- 16x2 LCD display (I2C)
+- Perfboard (dimensions here)
+- generic push button
+- Through-hole USB female connector
+- 3.5mm socket
+- 3D Printed parts
 
+Hardware is still very much WIP.
+The Hardware and assembly is made to be as simple as possible, and with as few printed parts as possible.
+
+my plan is it ho make the screen and the button all one "front panel" unit, and in the back having the teensy soldered to a piece of perfboard, srewed to the frame.
+The screen & the USB connector will be connected to the teensy via a JST XH connector. everything clearly labeled on the inside.
+
+maybe i can fit it all on a single piece of perfboard, not reqiering a single wire.
 
 
 
