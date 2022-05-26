@@ -42,6 +42,8 @@ Parts list:
 - 3.5mm socket
 - 3D Printed parts
 
+(insert links)
+
 Hardware is still very much WIP.
 The Hardware and assembly is made to be as simple as possible, and with as few printed parts as possible.
 
