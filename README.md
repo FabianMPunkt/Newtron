@@ -1,5 +1,4 @@
 # Newtron
-## A little Arduino-based USB device that reads Serial data from a "TesT" - Newton-meter and transmits it directly to the Computer
 
 
 ## Introduction:
@@ -33,15 +32,19 @@ It's essentially the same, only with some extra USB code that i ripped from [her
 (files labeled with "Teensy")
 
 
+## Hardware:
+
+Hardware is still very much WIP
 In the final project i will also be using a 16x2LCD with an i2c add-on.
 I will also be making some building Instructions.
 
-All this is still WIP.
+
 
 
 TODO:
 
 - make 3d-printalbe encosure
+- make build log / instructions
 - add i2c-LCD to Teensy code
 - make debug commands via serial
 - build the damn thing
