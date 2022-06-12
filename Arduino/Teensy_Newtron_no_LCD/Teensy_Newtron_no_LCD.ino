@@ -34,12 +34,14 @@ int pedalPin = 9;
 bool currentPedalState;
 bool lastPedalState;
 
+int USBStatusLED = 13;
 
 void setup() {
 
   pinMode (pedalPin, INPUT_PULLUP);
   pinMode (11, OUTPUT);
-  pinMode (13, OUTPUT);
+  pinMode (USBStatusLED, OUTPUT);
+  
   digitalWrite(11, LOW);
 
   Keyboard.begin();
@@ -61,7 +63,7 @@ void loop() {
       if (driver_active[i]) {
        driver_active[i] = false;
         Serial.println("USB disconnected");
-        digitalWrite(13, LOW);
+        digitalWrite(USBStatusLED, LOW);
         rstMaxValue();
         
       }
@@ -70,7 +72,7 @@ void loop() {
         driver_active[i] = true;
         userial.begin(baud);
         Serial.println("USB connected");
-        digitalWrite(13, HIGH);
+        digitalWrite(USBStatusLED, HIGH);
         
       }
     }
