@@ -137,7 +137,7 @@ void loop() {
 
     if (finValue >= maxValue) {                       //largest value gets saves as "maxValue".
       maxValue = finValue;
-      displayON();                            //whenever there is a new "maxValue" the LCD will turn on again.
+      displayON();                                    //whenever there is a new "maxValue" the LCD will turn on again.
       lcd.setCursor(0, 1);
       lcd.print("      ");
       lcd.setCursor(0, 1);
