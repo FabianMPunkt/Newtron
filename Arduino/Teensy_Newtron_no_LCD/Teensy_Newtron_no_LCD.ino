@@ -1,7 +1,7 @@
 //
 //  Newtron V0.9
 //  Teensy 4.1 (without LCD)
-//  https://github.com/TheWaschtlPlays/Newtron
+//  https://github.com/FabianMPunkt/Newtron
 //
 //
 //  This reads incoming data from Serial1, that is seperated by a "".
