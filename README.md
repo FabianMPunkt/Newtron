@@ -41,19 +41,22 @@ Parts list:
 - Perfboard (20x80mm)
 - generic push button
 - JST-XH Connectors
-- 3D Printed parts
+- Threaded inserts (optional)
+- [3D Printed parts](CAD/3MF/)
 
 
-Hardware is still very much WIP.
-The Hardware and assembly is made to be as simple as possible, and with as few printed parts as possible.
+I tried making the enclosure as simple as possible, but also have it not be an ugly box.
+There's three parts to print: [Base](CAD/3MF/Newtron_Base.3mf), [Top](CAD/3MF/Newtron_Top.3mf) and [Front](CAD/3MF/Newtron_Front.3mf)
 
-my plan is it to make the screen and the button all one "front panel" unit, and in the back having the teensy soldered to a piece of perfboard, srewed to the frame.
-The screen & the USB connector will be connected to the teensy via a JST XH connector. everything clearly labeled on the inside.
+Here's the [Schematic](CAD/Newtron_Schematic.pdf)
 
+### Build guide:
+
+WIP
 
 TODO:
 
-- make 3d-printalbe encosure
+
 - make build log / instructions
 - add i2c-LCD to Teensy code
 - make debug commands via serial
