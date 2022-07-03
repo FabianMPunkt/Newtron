@@ -41,7 +41,6 @@ Parts list:
 - Perfboard (20x80mm)
 - generic push button
 - JST-XH Connectors
-- Threaded inserts (optional)
 - [3D Printed parts](CAD/3MF/)
 
 
