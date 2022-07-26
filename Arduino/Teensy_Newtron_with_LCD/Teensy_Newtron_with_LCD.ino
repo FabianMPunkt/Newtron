@@ -42,7 +42,7 @@ unsigned long millisUntilTimeout;
 unsigned long timeoutValue = 30000;         //timeout Value for the LCD, when inactive to prevent LCD burn-in. (using millis)
 
 const int rstPin = 11;
-const int pedalPin = 5;
+const int pedalPin = 8;
 bool currentPedalState;
 bool lastPedalState;
 bool lcdStatus;
@@ -53,8 +53,10 @@ void setup() {
   pinMode (pedalPin, INPUT_PULLUP);
   pinMode (rstPin, INPUT_PULLUP);
 
-  pinMode (12, OUTPUT);               //Pin 12 is used as a GND.
-  digitalWrite(12, LOW);
+  pinMode (7, OUTPUT);               //used as a GND.
+  pinMode (10, OUTPUT);
+  digitalWrite(7, LOW);
+  digitalWrite(10, LOW);
 
   Keyboard.begin();
 
@@ -82,6 +84,8 @@ void loop() {
        driver_active[i] = false;
         Serial.println("USB disconnected");
         rstMaxValue();
+        lcd.setCursor(0, 1);
+        lcd.print("USB not found");
         
       }
       
@@ -111,7 +115,7 @@ void loop() {
 
     finValue = integFloat + decimFloat;               //adds integer number and decimal number.
 
-    if (finValue >= maxValue) {                       //largest value gets saves as "maxValue".
+    if (finValue > maxValue) {                       //largest value gets saves as "maxValue".
       maxValue = finValue;
       displayON();                                    //whenever there is a new "maxValue" the LCD will turn on again.
       lcd.setCursor(0, 1);
@@ -135,6 +139,8 @@ void loop() {
     Serial.print(finValue);
     Serial.print(" | max: ");
     Serial.print(maxValue);
+    Serial.print(" | time: ");
+    Serial.print((millisUntilTimeout - currentMillis) / 1000);
     Serial.println();
 
 
@@ -143,10 +149,14 @@ void loop() {
     }
 
     Pedal();
-
+    
+    
     displayTimeout();
+
     
   }
+
+  displayTimeout();
   
 }
 
