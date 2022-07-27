@@ -65,8 +65,8 @@ void setup() {
   myusb.begin();
   Serial.begin(9600);
 
-  lcd.setCursor(0, 0);
-  lcd.print("Spitzenwert:");
+  lcd.setCursor(1, 0);
+  lcd.print("USB not found!");
   displayON();                              //the "displayON" function will turn on the LCD and reset the timeout.
 
   maxValue = 0;
@@ -84,8 +84,9 @@ void loop() {
        driver_active[i] = false;
         Serial.println("USB disconnected");
         rstMaxValue();
-        lcd.setCursor(0, 1);
-        lcd.print("USB not found");
+        lcd.clear();
+        lcd.setCursor(1, 0);
+        lcd.print("USB not found!");
         
       }
       
@@ -93,6 +94,10 @@ void loop() {
         driver_active[i] = true;
         userial.begin(baud);
         Serial.println("USB connected");
+
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Spitzenwert:");
         
       }
     }
