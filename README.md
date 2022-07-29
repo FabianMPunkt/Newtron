@@ -38,10 +38,10 @@ Parts list:
 - [16x2 I2C-LCD Display](https://www.conrad.de/de/p/joy-it-sbc-lcd16x2-display-modul-6-6-cm-2-6-zoll-16-x-2-pixel-passend-fuer-entwicklungskits-raspberry-pi-arduino-b-1503825.html)
 - [Through-hole USB female connector](https://de.rs-online.com/web/p/usb-steckverbinder/6741325)
 - [3.5mm socket](https://de.rs-online.com/web/p/klinken-steckerbuchsen/5051429)
-- Perfboard (20x80mm)
 - generic push button
 - JST-XH Connectors
 - [3D Printed parts](CAD/3MF/)
+- M4x20 Screws
 
 
 I tried making the enclosure as simple as possible, but also have it not be an ugly box.
