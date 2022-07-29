@@ -57,6 +57,5 @@ TODO:
 
 
 - make build log / instructions
-- add i2c-LCD to Teensy code
 - make debug commands via serial
 - build the damn thing
