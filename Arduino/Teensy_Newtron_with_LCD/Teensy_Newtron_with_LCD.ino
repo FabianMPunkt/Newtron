@@ -4,6 +4,10 @@
 //  https://github.com/FabianMPunkt/Newtron
 //
 //
+//  USB Type: "Serial + Keyboard + Mouse + Joystick"
+//  CPU Speed: 150MHz
+//
+//
 //  This reads incoming data from Serial1, that is seperated by a "".
 //  it then determines the maximum value
 //  when pin3 is pulled low, it sends said value to the connected computer as if it were keyboard presses.
