@@ -14,16 +14,15 @@
 
 
 #include "LCD_I2C.h"
-
-LCD_I2C lcd(0x27, 16, 2);
+LCD_I2C lcd(0x27, 16, 2);       //Defines LCD Type
 
 #include "Keyboard.h"
 
 #include "USBHost_t36.h"
-#define USBBAUD 9600
+#define USBBAUD 115200          //BAUDRADE for the Serial of the USB-Host
 uint32_t baud = USBBAUD;
 USBHost myusb;
-USBSerial_BigBuffer userial(myusb, 1); // Handles anything up to 512 bytes
+USBSerial_BigBuffer userial(myusb, 1);
 
 USBDriver *drivers[] = {&userial};
 #define CNT_DEVICES (sizeof(drivers)/sizeof(drivers[0]))
@@ -31,9 +30,8 @@ bool driver_active[CNT_DEVICES] = {false};
 
 
 
-
 String integString;           //innteger part of the value
-String decimString;           //decimal point of the value
+String decimString;           //decimal part of the value
 
 float integFloat;
 float decimFloat;
@@ -43,13 +41,13 @@ float maxValue = 0;
 
 unsigned long currentMillis;
 unsigned long millisUntilTimeout;
-unsigned long timeoutValue = 30000;         //timeout Value for the LCD, when inactive to prevent LCD burn-in. (using millis)
+unsigned long timeoutValue = 90000;         //timeout Value for the LCD, when inactive to prevent LCD burn-in. (using millis)
 
 const int rstPin = 11;
 const int pedalPin = 8;
 bool currentPedalState;
 bool lastPedalState;
-bool lcdStatus;
+
 
 
 void setup() {
@@ -57,7 +55,7 @@ void setup() {
   pinMode (pedalPin, INPUT_PULLUP);
   pinMode (rstPin, INPUT_PULLUP);
 
-  pinMode (7, OUTPUT);               //used as a GND.
+  pinMode (7, OUTPUT);               //Pin 7 and 10 are used as GND
   pinMode (10, OUTPUT);
   digitalWrite(7, LOW);
   digitalWrite(10, LOW);
@@ -81,7 +79,7 @@ void setup() {
 
 void loop() {
   
-  for (uint8_t i = 0; i < CNT_DEVICES; i++) {     //USB detection. no clue how this works lol.
+  for (uint8_t i = 0; i < CNT_DEVICES; i++) {     //USB detection. no clue how this works lol. (Source: https://github.com/PaulStoffregen/USBHost_t36/blob/master/examples/Serial/Serial.ino)
      if (*drivers[i] != driver_active[i]) {
       
       if (driver_active[i]) {
@@ -124,7 +122,7 @@ void loop() {
 
     finValue = integFloat + decimFloat;               //adds integer number and decimal number.
 
-    if (finValue > maxValue) {                       //largest value gets saves as "maxValue".
+    if (finValue > maxValue) {                        //largest value gets saves as "maxValue".
       maxValue = finValue;
       displayON();                                    //whenever there is a new "maxValue" the LCD will turn on again.
       lcd.setCursor(0, 1);
@@ -201,10 +199,6 @@ void displayON() {
 
   lcd.backlight();
   lcd.display();
-  lcdStatus = true;
-
-  lcd.setCursor(15, 0);
-  lcd.print(" ");
 }
 
 
@@ -212,16 +206,9 @@ void displayTimeout() {
 
     currentMillis = millis();
 
-  if (((millisUntilTimeout - currentMillis) / 1000) <= 9 ) {              //when the timeout is only 9 seconds away, it will show a countdown on the top right.
-    lcd.setCursor(15, 0);
-    lcd.print((millisUntilTimeout - currentMillis) / 1000);
-  }
-
-
-  if ((currentMillis > millisUntilTimeout) && lcdStatus == true) {        //this turns off the LCD when the timeout is reached.
+  if (currentMillis > millisUntilTimeout) {        //this turns off the LCD when the timeout is reached.
     lcd.noBacklight();
     lcd.noDisplay();
-    lcdStatus = false;
   }
 }
 
