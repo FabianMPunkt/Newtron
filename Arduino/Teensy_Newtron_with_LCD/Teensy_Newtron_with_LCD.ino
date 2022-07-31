@@ -78,20 +78,20 @@ void setup() {
 
 
 void loop() {
-  
-  for (uint8_t i = 0; i < CNT_DEVICES; i++) {     //USB detection. no clue how this works lol. (Source: https://github.com/PaulStoffregen/USBHost_t36/blob/master/examples/Serial/Serial.ino)
-     if (*drivers[i] != driver_active[i]) {
-      
+
+  for (uint8_t i = 0; i < CNT_DEVICES; i++) {     //USB detection ripped from: https://github.com/PaulStoffregen/USBHost_t36/blob/master/examples/Serial/Serial.ino
+    if (*drivers[i] != driver_active[i]) {
+
       if (driver_active[i]) {
-       driver_active[i] = false;
+        driver_active[i] = false;
         Serial.println("USB disconnected");
         rstMaxValue();
         lcd.clear();
         lcd.setCursor(1, 0);
         lcd.print("USB not found!");
-        
+
       }
-      
+
       else {
         driver_active[i] = true;
         userial.begin(baud);
@@ -100,12 +100,12 @@ void loop() {
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("Spitzenwert:");
-        
+
       }
     }
-    
+
   }
-  
+
 
   while (userial.available()) {
 
@@ -113,8 +113,8 @@ void loop() {
     integString = userial.readStringUntil(',');       //reads the value before the comma.
     integFloat = integString.toFloat();               //converts String type to Float type
     integFloat = fabsf(integFloat);                   //turns all negative numbers positive
-    
-    
+
+
     decimString = userial.readStringUntil('');       //reads the value after the comma, until the separator ""
     decimFloat = decimString.toFloat();               //converts String type to Float type. the decimal number is now a standalone float variable.
     decimFloat = decimFloat / 10;                     //devides the decimal number by 10.
@@ -124,7 +124,7 @@ void loop() {
 
     if (finValue > maxValue) {                        //largest value gets saves as "maxValue".
       maxValue = finValue;
-      displayON();                                    //whenever there is a new "maxValue" the LCD will turn on again.
+      displayON();                                    //whenever there is a new "maxValue" the LCD will turn on again. TESTING NEEDED! I think this is really slow
       lcd.setCursor(0, 1);
       lcd.print("      ");
       lcd.setCursor(0, 1);
@@ -132,11 +132,11 @@ void loop() {
     }
 
 
-    lcd.setCursor(8, 1);
-    lcd.print("      ");
-    lcd.setCursor(8, 1);
-    lcd.print(finValue);
-    
+    //    lcd.setCursor(8, 1);
+    //    lcd.print("      ");
+    //    lcd.setCursor(8, 1);
+    //    lcd.print(finValue);
+
 
     Serial.print("raw: ");
     Serial.print(integString);
@@ -152,19 +152,17 @@ void loop() {
 
 
     if (digitalRead(rstPin) == LOW) {           //reset "maxValue"
-    rstMaxValue();
+      rstMaxValue();
     }
 
     Pedal();
-    
-    
+
     displayTimeout();
 
-    
   }
 
   displayTimeout();
-  
+
 }
 
 
@@ -175,9 +173,9 @@ void Pedal() {
   currentPedalState = digitalRead(pedalPin);
 
   if (lastPedalState == HIGH && currentPedalState == LOW) {
-    
+
     Serial.println("Pedal has been pressed");
-     
+
     Keyboard.println(maxValue);
     rstMaxValue();
     delay(300);                             //300ms delay so you cant accidentally press the pedal twice.
@@ -204,7 +202,7 @@ void displayON() {
 
 void displayTimeout() {
 
-    currentMillis = millis();
+  currentMillis = millis();
 
   if (currentMillis > millisUntilTimeout) {        //this turns off the LCD when the timeout is reached.
     lcd.noBacklight();
