@@ -4,8 +4,8 @@
 //  https://github.com/FabianMPunkt/Newtron
 //
 //
-//  USB Type: "Serial + Keyboard + Mouse + Joystick"
-//  CPU Speed: 150MHz
+//  USB Type: "Keyboard"
+//  CPU Speed: 396MHz
 //
 //
 //  This reads incoming data from Serial1, that is seperated by a "".
@@ -39,7 +39,6 @@ float decimFloat;
 float finValue;
 float maxValue = 0;
 
-unsigned long currentMillis;
 unsigned long millisUntilTimeout;
 unsigned long timeoutValue = 90000;         //timeout Value for the LCD, when inactive to prevent LCD burn-in. (using millis)
 
@@ -67,9 +66,14 @@ void setup() {
   myusb.begin();
   Serial.begin(9600);
 
-  lcd.setCursor(1, 0);
-  lcd.print("USB not found!");
-  displayON();                              //the "displayON" function will turn on the LCD and reset the timeout.
+  if (userial.available()== false){
+        lcd.setCursor(0, 0);
+        lcd.print("USB not found!");    
+  }
+
+  
+  //lcd.setCursor(0, 0);
+  //lcd.print("USB not found!");
 
   maxValue = 0;
 
@@ -87,7 +91,7 @@ void loop() {
         Serial.println("USB disconnected");
         rstMaxValue();
         lcd.clear();
-        lcd.setCursor(1, 0);
+        lcd.setCursor(0, 0);
         lcd.print("USB not found!");
 
       }
@@ -126,8 +130,6 @@ void loop() {
       maxValue = finValue;
       displayON();                                    //whenever there is a new "maxValue" the LCD will turn on again. TESTING NEEDED! I think this is really slow
       lcd.setCursor(0, 1);
-      lcd.print("      ");
-      lcd.setCursor(0, 1);
       lcd.print(maxValue);
     }
 
@@ -136,18 +138,14 @@ void loop() {
     //    lcd.print("      ");
     //    lcd.setCursor(8, 1);
     //    lcd.print(finValue);
+    
 
-
-    Serial.print("raw: ");
-    Serial.print(integString);
-    Serial.print(",");
-    Serial.print(decimString);
-    Serial.print(" | fin: ");
+    Serial.print("fin: ");
     Serial.print(finValue);
     Serial.print(" | max: ");
     Serial.print(maxValue);
     Serial.print(" | time: ");
-    Serial.print((millisUntilTimeout - currentMillis) / 1000);
+    Serial.print((millisUntilTimeout - millis() ) / 1000);
     Serial.println();
 
 
@@ -193,7 +191,7 @@ void rstMaxValue() {
 
 
 void displayON() {
-  millisUntilTimeout = currentMillis + timeoutValue;
+  millisUntilTimeout = millis() + timeoutValue;
 
   lcd.backlight();
   lcd.display();
@@ -202,12 +200,11 @@ void displayON() {
 
 void displayTimeout() {
 
-  currentMillis = millis();
-
-  if (currentMillis > millisUntilTimeout) {        //this turns off the LCD when the timeout is reached.
+  if (millis() > millisUntilTimeout) {        //this turns off the LCD when the timeout is reached.
     lcd.noBacklight();
     lcd.noDisplay();
   }
+  
 }
 
 
