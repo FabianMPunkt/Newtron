@@ -71,10 +71,6 @@ void setup() {
         lcd.print("USB not found!");    
   }
 
-  
-  //lcd.setCursor(0, 0);
-  //lcd.print("USB not found!");
-
   maxValue = 0;
 
 }
