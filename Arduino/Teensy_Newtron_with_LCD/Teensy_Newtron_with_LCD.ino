@@ -4,7 +4,7 @@
 //  https://github.com/FabianMPunkt/Newtron
 //
 //
-//  USB Type: "Keyboard"
+//  USB Type: "Serial + Keyboard + Mouse + Joystick"
 //  CPU Speed: 396MHz
 //
 //
@@ -63,8 +63,9 @@ void setup() {
 
   bootAnim();
 
-  myusb.begin();
   Serial.begin(9600);
+
+  myusb.begin();
 
   if (userial.available()== false){
         lcd.setCursor(0, 0);
