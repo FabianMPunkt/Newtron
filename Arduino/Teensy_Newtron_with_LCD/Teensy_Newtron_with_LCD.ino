@@ -149,9 +149,7 @@ void loop() {
     Serial.println();
 
 
-    if (digitalRead(rstPin) == LOW) {           //reset "maxValue"
-      rstMaxValue();
-    }
+    rstButton();
 
     Pedal();
 
@@ -159,10 +157,18 @@ void loop() {
 
   }
 
+  rstButton();
+
   displayTimeout();
 
 }
 
+
+void rstButton() {
+  if (digitalRead(rstPin) == LOW) {           //reset "maxValue"
+    rstMaxValue();
+  }
+}
 
 
 void Pedal() {
