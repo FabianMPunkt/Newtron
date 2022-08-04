@@ -50,12 +50,3 @@ There's three parts to print: [Base](CAD/3MF/Newtron_Base.3mf), [Top](CAD/3MF/Ne
 Here's the [Schematic](CAD/Newtron_Schematic.pdf)
 
 ### Build guide:
-
-WIP
-
-TODO:
-
-
-- make build log / instructions
-- make debug commands via serial
-- build the damn thing
