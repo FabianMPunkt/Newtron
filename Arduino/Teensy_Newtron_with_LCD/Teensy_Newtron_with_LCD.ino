@@ -1,5 +1,5 @@
 //
-//  Newtron V0.9
+//  Newtron V1.0
 //  Teensy 4.1 + I2C LCD
 //  https://github.com/FabianMPunkt/Newtron
 //
@@ -47,9 +47,13 @@ const int pedalPin = 8;
 bool currentPedalState;
 bool lastPedalState;
 
+int animDelay = 30;
 
 
 void setup() {
+
+  bootAnimStart();                  //Start sequence of the boot animation
+
 
   pinMode (pedalPin, INPUT_PULLUP);
   pinMode (rstPin, INPUT_PULLUP);
@@ -59,20 +63,18 @@ void setup() {
   digitalWrite(7, LOW);
   digitalWrite(10, LOW);
 
-  Keyboard.begin();
 
-  bootAnim();
+  Keyboard.begin();
 
   Serial.begin(9600);
 
   myusb.begin();
 
-  if (userial.available()== false){
-        lcd.setCursor(0, 0);
-        lcd.print("USB not found!");    
-  }
 
-  maxValue = 0;
+  bootAnimEnd();                      //End sequence of the boot animation
+
+  lcd.setCursor(0, 0);
+  lcd.print("USB not found!");      //"USB not found" message is hardcoded so it display correctly, if USB is disconnected when booting. Yes, i know it is stupid
 
 }
 
@@ -101,6 +103,7 @@ void loop() {
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("Spitzenwert:");
+        rstMaxValue();
 
       }
     }
@@ -135,7 +138,7 @@ void loop() {
     //    lcd.print("      ");
     //    lcd.setCursor(8, 1);
     //    lcd.print(finValue);
-    
+
 
     Serial.print("fin: ");
     Serial.print(finValue);
@@ -201,13 +204,11 @@ void displayTimeout() {
     lcd.noBacklight();
     lcd.noDisplay();
   }
-  
+
 }
 
 
-void bootAnim() {                 //fancy boot animation cus why not
-  int animDelay = 30;
-
+void bootAnimStart() {                 //fancy boot animation cus why not
 
   lcd.begin();
   displayON();
@@ -240,14 +241,17 @@ void bootAnim() {                 //fancy boot animation cus why not
   lcd.print("V");
   delay(animDelay);
   lcd.setCursor(9, 0);
-  lcd.print("0");
+  lcd.print("1");
   delay(animDelay);
   lcd.setCursor(10, 0);
   lcd.print(".");
   delay(animDelay);
   lcd.setCursor(11, 0);
-  lcd.print("9");
-  delay(1000);
+  lcd.print("0");
+
+}
+
+void bootAnimEnd() {
 
   lcd.setCursor(0, 0);
   lcd.print("  ");
@@ -262,5 +266,4 @@ void bootAnim() {                 //fancy boot animation cus why not
   delay(animDelay);
   lcd.print("  ");
 
-  delay(300);
 }
