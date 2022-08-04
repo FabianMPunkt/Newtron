@@ -47,7 +47,7 @@ const int pedalPin = 8;
 bool currentPedalState;
 bool lastPedalState;
 
-int animDelay = 30;
+int animDelay = 20;
 
 
 void setup() {
@@ -271,5 +271,6 @@ void bootAnimEnd() {
   lcd.print("  ");
   delay(animDelay);
   lcd.print("  ");
+  delay(animDelay);
 
 }
