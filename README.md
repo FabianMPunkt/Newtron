@@ -53,7 +53,7 @@ There's three parts to print: [Base](CAD/3MF/Newtron_Base.3mf), [Top](CAD/3MF/Ne
 
 WIP
 
-First up, here's all the connector cables you'll need:
+First up, here's all the connector cables you'll need to make:
 
 USB Port:
 ![20220804_093035](https://user-images.githubusercontent.com/78741736/182795334-7a1e6e6e-6357-480d-b735-0dfa330438a1.JPG)
