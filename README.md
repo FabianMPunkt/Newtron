@@ -68,7 +68,7 @@ Display cables
 ![20220804_093246](https://user-images.githubusercontent.com/78741736/182795470-eda12e60-476b-4890-826c-eccdea96f23d.JPG)
 
 
-I just soldered some JST-XH connectors directly to the Teensy like this:
+I think the simplest way is to solder some JST-XH connectors directly to the Teensy like this:
 ![Teensy](https://user-images.githubusercontent.com/78741736/182794769-4b2c661b-feb1-41eb-9864-1852cbda7a34.JPG)
 
 Refer to the [Schematic](CAD/Newtron_Schematic.pdf) for more detailed wiring.
