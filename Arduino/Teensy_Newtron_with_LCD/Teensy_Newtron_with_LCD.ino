@@ -191,7 +191,7 @@ void rstMaxValue() {
   displayON();
   maxValue = 0;
   lcd.setCursor(0, 1);
-  lcd.print("      ");
+  lcd.print("                ");
   Serial.println("maxVaule has been reset");
 }
 
