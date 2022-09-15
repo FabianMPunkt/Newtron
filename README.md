@@ -48,27 +48,3 @@ I tried making the enclosure as simple as possible, but also have it not be an u
 There's three parts to print: [Base](CAD/3MF/Newtron_Base.3mf), [Top](CAD/3MF/Newtron_Top.3mf) and [Front](CAD/3MF/Newtron_Front.3mf)
 
 
-
-### Build guide:
-
-WIP
-
-First up, here's all the connector cables you'll need to make:
-
-USB Port:
-![20220804_093035](https://user-images.githubusercontent.com/78741736/182795334-7a1e6e6e-6357-480d-b735-0dfa330438a1.JPG)
-
-Pedal jack:
-![20220804_093047](https://user-images.githubusercontent.com/78741736/182795389-f8a6395b-4bba-4732-a6f8-5188ec67dc37.JPG)
-
-Button:
-![20220804_093101](https://user-images.githubusercontent.com/78741736/182795409-15501130-b6f0-4c5a-8f1e-994f052e65b4.JPG)
-
-Display cables
-![20220804_093246](https://user-images.githubusercontent.com/78741736/182795470-eda12e60-476b-4890-826c-eccdea96f23d.JPG)
-
-
-I think the simplest way is to solder some JST-XH connectors directly to the Teensy like this:
-![Teensy](https://user-images.githubusercontent.com/78741736/182794769-4b2c661b-feb1-41eb-9864-1852cbda7a34.JPG)
-
-Refer to the [Schematic](CAD/Newtron_Schematic.pdf) for more detailed wiring.
