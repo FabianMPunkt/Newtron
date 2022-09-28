@@ -11,4 +11,4 @@ With the press of a button the highest value will the be sent to the computer us
 The TesT-device trannsmits all the values over its USBSerial Port in a single line as seen in [these readings](misc/OG_readings.txt).
 GitHub's formatting doen't disply this correctly though. All the values are in-fact separated by a ""
 
-A detailed build guide & more info can be found in the Wiki.
+A detailed build guide & more info can be found in the [Wiki](https://github.com/FabianMPunkt/Newtron/wiki).
