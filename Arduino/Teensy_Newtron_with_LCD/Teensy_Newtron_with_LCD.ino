@@ -1,5 +1,5 @@
-//
-//  Newtron V1.1
+String Version = "Newtron V1.1";
+
 //  Teensy 4.1 + I2C LCD
 //  https://github.com/FabianMPunkt/Newtron
 //
@@ -11,6 +11,7 @@
 //  This reads incoming data from Serial1, that is seperated by a "".
 //  it then determines the maximum value
 //  when pin3 is pulled low, it sends said value to the connected computer as if it were keyboard presses.
+
 
 
 #include "LCD_I2C.h"
@@ -55,7 +56,6 @@ bool lastPedalState;
 
 int animDelay = 20;
 
-
 void setup() {
 
   bootAnimStart();  //Start sequence of the boot animation
@@ -73,6 +73,9 @@ void setup() {
   Keyboard.begin();
 
   Serial.begin(9600);
+
+  Serial.println(Version);
+  Serial.println("https://github.com/FabianMPunkt/Newtron");
 
   myusb.begin();
 
@@ -253,40 +256,41 @@ void bootAnimStart() {  //fancy boot animation cus why not
   displayON();
 
   lcd.setCursor(0, 0);
-  lcd.print("N");
+  lcd.print(Version.substring(0, 1));
   delay(animDelay);
   lcd.setCursor(1, 0);
-  lcd.print("e");
+  lcd.print(Version.substring(1, 2));
   delay(animDelay);
   lcd.setCursor(2, 0);
-  lcd.print("w");
+  lcd.print(Version.substring(2, 3));
   delay(animDelay);
   lcd.setCursor(3, 0);
-  lcd.print("t");
+  lcd.print(Version.substring(3, 4));
   delay(animDelay);
   lcd.setCursor(4, 0);
-  lcd.print("r");
+  lcd.print(Version.substring(4, 5));
   delay(animDelay);
   lcd.setCursor(5, 0);
-  lcd.print("o");
+  lcd.print(Version.substring(5, 6));
   delay(animDelay);
   lcd.setCursor(6, 0);
-  lcd.print("n");
+  lcd.print(Version.substring(6, 7));
   delay(animDelay);
   lcd.setCursor(7, 0);
-  lcd.print(" ");
+  lcd.print(Version.substring(7, 8));
   delay(animDelay);
   lcd.setCursor(8, 0);
-  lcd.print("V");
+  lcd.print(Version.substring(8, 9));
   delay(animDelay);
   lcd.setCursor(9, 0);
-  lcd.print("1");
+  lcd.print(Version.substring(9, 10));
   delay(animDelay);
   lcd.setCursor(10, 0);
-  lcd.print(".");
+  lcd.print(Version.substring(10, 11));
   delay(animDelay);
   lcd.setCursor(11, 0);
-  lcd.print("1");
+  lcd.print(Version.substring(11, 12));
+  delay(animDelay * 10);
 }
 
 void bootAnimEnd() {
