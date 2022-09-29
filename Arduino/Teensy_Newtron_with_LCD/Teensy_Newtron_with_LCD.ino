@@ -83,7 +83,7 @@ void setup() {
   bootAnimEnd();  //End sequence of the boot animation
 
   lcd.setCursor(0, 0);
-  lcd.print("USB not found!");  //"USB not found" message is hardcoded so it display correctly, if USB is disconnected when booting. Yes, i know it is stupid
+  lcd.print("USB disconnected");  //"USB not found" message is hardcoded so it display correctly, if USB is disconnected when booting. Yes, i know it is stupid
 }
 
 
@@ -245,6 +245,7 @@ void dataStreamTimeout() {  //if no data is coming for more than 2000ms, it will
       lcd.setCursor(0, 1);
       lcd.print("DSI Transmission");
       dataState = false;
+      Serial.println("No data found!");
     }
   }
 }
@@ -290,7 +291,10 @@ void bootAnimStart() {  //fancy boot animation cus why not
   delay(animDelay);
   lcd.setCursor(11, 0);
   lcd.print(Version.substring(11, 12));
-  delay(animDelay * 10);
+  delay(animDelay);
+  lcd.setCursor(12, 0);
+  lcd.print(Version.substring(12, 13));
+  delay(animDelay);
 }
 
 void bootAnimEnd() {
