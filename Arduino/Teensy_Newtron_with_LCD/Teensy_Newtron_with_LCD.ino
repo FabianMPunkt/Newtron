@@ -1,4 +1,4 @@
-String Version = "Newtron V1.2";
+String Version = "Newtron V1.21";
 
 //  Teensy 4.1 + I2C LCD
 //  https://github.com/FabianMPunkt/Newtron
@@ -23,10 +23,14 @@ String Version = "Newtron V1.2";
 // to
 
 // 	// Lets try to map CDCACM devices only at device level
-//	if ((dev->bDeviceClass == 2) && (dev->bDeviceSubClass == 0) && ((type == 0) )) {
+//	if ((dev->bDeviceClass == 2) && (dev->bDeviceSubClass == 0)) {
 //
 // this way it will work with newer USB-C TesT-devices.
 // https://forum.pjrc.com/threads/73829-Need-help-with-USBSerial-device-not-getting-recognized-by-teensy-4-1?p=333498#post333498
+//
+// You may also have to uncomment "//USBHS_PORTSC1 |= USBHS_PORTSC_PFSC; // force 12 Mbit/sec"
+// inside of USBHost_t36/ehci.cpp
+
 
 #include "LCD_I2C.h"
 LCD_I2C lcd(0x27, 16, 2);  //Defines LCD Type
