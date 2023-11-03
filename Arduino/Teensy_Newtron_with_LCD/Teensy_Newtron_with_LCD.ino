@@ -1,4 +1,4 @@
-String Version = "Newtron V1.1";
+String Version = "Newtron V1.2";
 
 //  Teensy 4.1 + I2C LCD
 //  https://github.com/FabianMPunkt/Newtron
@@ -13,6 +13,20 @@ String Version = "Newtron V1.1";
 //  when pin3 is pulled low, it sends said value to the connected computer as if it were keyboard presses.
 
 
+// Update 03.11.2023: 
+// inside USBHost_t36/serial.cpp change
+
+// // Lets try to map CDCACM devices only at device level
+//  	if ((dev->bDeviceClass == 2) && (dev->bDeviceSubClass == 0)) {
+//  		if (type != 0) return false;
+
+// to
+
+// 	// Lets try to map CDCACM devices only at device level
+//	if ((dev->bDeviceClass == 2) && (dev->bDeviceSubClass == 0) && ((type == 0) )) {
+//
+// this way it will work with newer USB-C TesT-devices.
+// https://forum.pjrc.com/threads/73829-Need-help-with-USBSerial-device-not-getting-recognized-by-teensy-4-1?p=333498#post333498
 
 #include "LCD_I2C.h"
 LCD_I2C lcd(0x27, 16, 2);  //Defines LCD Type
@@ -23,7 +37,7 @@ LCD_I2C lcd(0x27, 16, 2);  //Defines LCD Type
 #define USBBAUD 115200  //BAUDRADE for the Serial of the USB-Host
 uint32_t baud = USBBAUD;
 USBHost myusb;
-USBSerial_BigBuffer userial(myusb, 1);
+USBSerial_BigBuffer userial(myusb);
 
 USBDriver *drivers[] = { &userial };
 #define CNT_DEVICES (sizeof(drivers) / sizeof(drivers[0]))
